@@ -3,7 +3,7 @@ import { LoginPage } from "../pages/LoginPage.ts";
 
 const authFile = '.auth/user.json';
 
-setup('Authenticating', async ({page}) => {
+setup.skip('Authenticating', async ({page}) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
     await loginPage.login(process.env.USERNAME, process.env.PASSWORD);

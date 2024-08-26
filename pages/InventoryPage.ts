@@ -1,10 +1,10 @@
 import { type Locator, type Page } from '@playwright/test'
-import test from 'node:test';
 
 export class InventoryPage{
     readonly page:Page;
     readonly hamburguerMenuButton:Locator;
     readonly cartButton:Locator;
+    readonly selectedFilterOption:Locator;
     readonly filterSelect:Locator;
     readonly addToCartButton:Locator;
     readonly removeButton:Locator;
@@ -15,6 +15,7 @@ export class InventoryPage{
         this.page = page;
         this.hamburguerMenuButton = this.page.getByRole('button', {name: 'Open Menu'});
         this.cartButton = this.page.getByTestId('shopping-cart-link');
+        this.selectedFilterOption = this.page.getByTestId('active-option');
         this.filterSelect = this.page.getByTestId('product-sort-container');
         this.addToCartButton = this.page.getByRole('button', {name: 'Add to cart'});
         this.removeButton = this.page.getByRole('button', {name: 'Remove'});
@@ -22,6 +23,7 @@ export class InventoryPage{
         this.numberOfProductsInCart = this.page.getByTestId('shopping-cart-badge');
     }
 
+    //The options available for the filter are: 'az','za','hilo' and 'lohi'
     public async sortPage(value:string){
         this.filterSelect.selectOption(value)
     }
