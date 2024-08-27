@@ -33,27 +33,27 @@ export class InventoryPage{
     }
 
     //Return the Add to Cart Button that matches the desired product.
-    //Use the end of the product as input to this method e.g. 'backpack' for Sauce Labs Backpack
-    public async getAddButton(product){
-        return this.addToCartButton.and(this.page.getByTestId(`add-to-cart-sauce-labs-${product}`));
+    public async getAddButton(productName:string){
+        const productNameLowerCase = productName.toLowerCase().replace(/ /g, '-'); //Converts the name to lower case and replaces spaces with '-'
+        return this.addToCartButton.and(this.page.getByTestId(`add-to-cart-sauce-labs-${productNameLowerCase}`)); //Return the correct button
     }
 
     //Use the end of the product as input to this method e.g. 'backpack' for Sauce Labs Backpack
-    public async addProductToCart(product){
-        const btn = await this.getAddButton(product)
-        await btn.click();
+    public async addProductToCart(productName:string){
+        const desiredButton = await this.getAddButton(productName)
+        await desiredButton.click();
     }
 
     //Return the Remove Button that matches the desired product.
-    //Use the end of the product as input to this method e.g. 'backpack' for Sauce Labs Backpack
-    public async getRemoveButton(product){
-        return this.removeButton.and(this.page.getByTestId(`remove-sauce-labs-${product}`));
+    public async getRemoveButton(productName:string){
+        const productNameLowerCase = productName.toLowerCase().replace(/ /g, '-'); //Converts the name to lower case and replaces spaces with '-'
+        return this.removeButton.and(this.page.getByTestId(`remove-sauce-labs-${productNameLowerCase}`)); //Return the correct button
     }
 
     //Use the end of the product as input to this method e.g. 'backpack' for Sauce Labs Backpack
-    public async removeProductFromCart(product){
-        const btn = await this.getRemoveButton(product);
-        await btn.click();
+    public async removeProductFromCart(productName:string){
+        const desiredButton = await this.getRemoveButton(productName);
+        await desiredButton.click();
     }
 
     public async openHamburguerMenu(){
